@@ -28,16 +28,17 @@ const Home = () => {
   const deleteNote = async (id) => {
     try {
       if (token) {
-        await fetch(`/api/notes/${id}`, {
+        const response = await fetch(`/api/notes/${id}`, {
           method: 'DELETE',
           headers: {
             Authorization: token,
           },
         });
+        await response.json();
         getNotes(token);
       }
     } catch (e) {
-      window.location.href = '/s';
+      window.location.href = '/';
     }
   };
 
@@ -53,10 +54,10 @@ const Home = () => {
           <div className='card-footer'>
             {note.name}
             <Link to={`edit/${note._id}`}>Edit</Link>
-            <button className='close' onClick={() => deleteNote}>
-              x
-            </button>
           </div>
+          <button className='close' onClick={() => deleteNote(note._id)}>
+            x
+          </button>
         </div>
       ))}
     </div>

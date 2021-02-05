@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Create from './notes/Create';
 import EditNote from './notes/EditNote';
@@ -8,14 +8,16 @@ import Nav from './notes/Nav';
 
 const Notes = ({ setIsLogin }) => {
   return (
-    <div className='notes-page'>
-      <Nav setIsLogin={setIsLogin} />
-      <section>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/create' component={Create} />
-        <Route exact path='/edit' component={EditNote} />
-      </section>
-    </div>
+    <Router>
+      <div className='notes-page'>
+        <Nav setIsLogin={setIsLogin} />
+        <section>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/create' component={Create} />
+          <Route exact path='/edit' component={EditNote} />
+        </section>
+      </div>
+    </Router>
   );
 };
 

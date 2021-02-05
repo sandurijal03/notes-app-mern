@@ -50,7 +50,8 @@ const Login = ({ setIsLogin }) => {
       localStorage.setItem('tokenStore', data.token);
       setIsLogin(true);
     } catch (err) {
-      err.response.data.msg && setError(err.response.data.msg);
+      console.log(err);
+      // err.response.data.msg && setError(err.response.data.msg);
     }
   };
 
@@ -61,8 +62,8 @@ const Login = ({ setIsLogin }) => {
   };
 
   return (
-    <section>
-      <div className='login'>
+    <section className='login-page'>
+      <div className='login create-note'>
         <h2>Login</h2>
         <form onSubmit={loginSubmit}>
           <input
@@ -93,7 +94,7 @@ const Login = ({ setIsLogin }) => {
         </form>
         <h3>{error}</h3>
       </div>
-      <div className='register' style={style}>
+      <div className='register create-note' style={style}>
         <h2>Register</h2>
         <form onSubmit={registerSubmit}>
           <input

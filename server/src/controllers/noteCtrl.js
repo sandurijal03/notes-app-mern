@@ -34,6 +34,16 @@ const noteCtrl = {
       });
     }
   },
+  deleteNote: async (req, res) => {
+    try {
+      await Note.findByIdAndDelete(req.params.id);
+      res.json({ msg: 'Deleted a note.' });
+    } catch (err) {
+      return res.status(500).json({
+        msg: err.message,
+      });
+    }
+  },
   updateNote: async (req, res) => {
     try {
       const { title, content, date } = req.body;
@@ -50,16 +60,6 @@ const noteCtrl = {
       res.json({
         msg: 'Updated a notes.',
       });
-    } catch (err) {
-      return res.status(500).json({
-        msg: err.message,
-      });
-    }
-  },
-  deleteNote: async (req, res) => {
-    try {
-      await Note.findByIdAndDelete(req.params.id);
-      res.json({ msg: 'Deleted a note.' });
     } catch (err) {
       return res.status(500).json({
         msg: err.message,
