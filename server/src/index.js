@@ -23,7 +23,7 @@ mongoose.connect(
   },
 );
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 app.use('/api/notes', notesRouter);
 
 const port = process.env.PORT || 3001;
