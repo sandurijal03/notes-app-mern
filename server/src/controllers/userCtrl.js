@@ -5,19 +5,17 @@ import { sign, verify } from 'jsonwebtoken';
 const userCtrl = {
   register: async (req, res) => {
     try {
-      const { username, email, password } = req.body;
+      const { name, email, password } = req.body;
       const user = await User.findOne({ email });
       if (user) {
         return res.status(400).json({ msg: 'The email already exists' });
       }
       const passwordHash = await hash(password, 12);
       const newUser = new User({
-        username,
+        name,
         email,
         password: passwordHash,
       });
-      res.json(newUser);
-
       await newUser.save();
       res.status(200).json({
         msg: 'Signup success.',
@@ -25,8 +23,6 @@ const userCtrl = {
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
-
-    res.json({ msg: 'Register a user' });
   },
   login: async (req, res) => {
     try {
@@ -44,7 +40,7 @@ const userCtrl = {
       // if login success create token
       const payload = {
         id: user._id,
-        name: user.username,
+        name: user.name,
       };
       const token = sign(payload, process.env.TOKEN_SECRET, {
         expiresIn: '1d',
@@ -54,8 +50,6 @@ const userCtrl = {
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
-
-    res.json({ msg: 'Login a user' });
   },
   verifiedToken: (req, res) => {
     try {

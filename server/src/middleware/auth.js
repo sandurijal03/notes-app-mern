@@ -8,7 +8,7 @@ const auth = (req, res, next) => {
     }
     verify(token, process.env.TOKEN_SECRET, (err, user) => {
       if (err) {
-        return res.status(400).json({ msg: 'Authorization' });
+        return res.status(400).json({ msg: 'Authorization not valid.' });
       }
       req.user = user;
       next();
@@ -19,5 +19,3 @@ const auth = (req, res, next) => {
 };
 
 export default auth;
-
-// 2053-6-5 5pm
