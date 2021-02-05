@@ -1,15 +1,15 @@
 import { Router } from 'express';
+import userCtrl from '../controllers/userCtrl';
 
 const router = Router();
 
 // register user
-router.post('/register', (req, res) => {
-  res.json({ msg: 'Register a user' });
-});
+router.post('/register', userCtrl.register);
 
 // login a user
-router.post('/login', (req, res) => {
-  res.json({ msg: 'Login a user' });
-});
+router.post('/login', userCtrl.login);
+
+// verify Token
+router.get('/verify', userCtrl.verifiedToken);
 
 export default router;
